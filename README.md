@@ -1,5 +1,5 @@
 
-# Regularization and Optimization of Neural Networks
+# Tuning Neural Networks with Regularization
 
 ## Introduction
 
