@@ -3,7 +3,7 @@
 
 ## Introduction
 
-Now that we've covered the concept behind neural networks as well as some streamlined methods for building such models, we will begin to explore futher concepts involved in tuning and optimizing the performance of these networks. One important aspect is reducing the time and resources needed to train these models. In previous lessons, when importing the Santa images, we immediately reduces each image to an extremely pixelated 64x64 representation. On top of that, we further downsampled our dataset to reduce the number of observations. This was because training neural networks is resource intensive and is often a time consuming process as a result. Finally, not only do we wish to reduce production time, we also naturally want to improve the accuracy and performance of these models. In this lesson, we will begin to examine various techniques related to these goals, beginning with the discussion of validation sets.
+Now that you've learned about neural networks and some streamlined methods for building such models, it's time to further explore how to tune and optimize the performance of these networks. One important aspect is reducing the time and resources needed to train these models. In previous lessons, when importing the Santa images, you immediately reduces each image to an extremely pixelated 64x64 representation. On top of that, you further down-sampled the dataset to reduce the number of observations. This was because training neural networks is resource intensive and is often a time consuming process as a result. Typically you also want to also improve the accuracy and performance of these models. In this lesson, you will begin to examine various techniques related to these goals, beginning with the discussion of validation sets.
 
 ## Objectives
 You will be able to:
@@ -12,37 +12,33 @@ You will be able to:
 
 ## Hyperparameters and iterative deep learning
 
-### There are many hyperparameters you can tune
+First, there are many hyperparameters you can tune. These include:
 
 - number of hidden units
 - number of layers
 - learning rate alpha
 - activation function
-... how to choose? 
+
+
+The question then becomes, how do you choose these parameters? One primary method will be developing validation sets to strike a balance between specificity and generalization.
 
 ## Training, Validation and Test Sets
 
-In the previous labs, we have been inconsistent about what to do regarding testing our models when trying to optimize them. For our santa examples, we have been using a training and a test set, but for the two circles example, we were both training and evaluation on the same data!
-
-Let's formalize how we'll proceed doing this. The fact that there are so many hyperparameters to tune calls for a formalized and unbiased approach. You've seen before that you want to use a training and a test set, because it is "unfair" to evaluate your model on the same data you used to select a certain model. 
-
-In short, we'll use 3 sets when running, selecting and validating a model:
+When tuning neural networks it typically helps to split the data into three distinct partitions as follows:
 - You train algorithms on the training set
 - You'll use a validation set to decide which one will be your final model after parameter tuning
 - After having chosen the final model (and having evaluated long enough), you'll use the test set to get an unbiased estimate of the classification performance (or whatever your evaluation metric will be).
 
-With big data, your dev and test sets don't necessarily need to be 20-30% of all the data. You can choose test and hold-out sets that are of size 1-5%. eg. 96% train, 2% hold-out, 2% test set. 
-
 Remeber that it is **VERY IMPORTANT** to make sure holdout and test sample come from the same distribution: eg. same resolution of santa pictures. 
 
-What we did before is actually use the holdout set as a test set as well! actually our "test set" was a holdout set. You're basically overfitting to the test set!
+## Bias and Variance in Deep Learning
 
-## Bias and variance in deep learning
+Finding a balance between generalization and specificity is at the heart of the bias-variance trade off. To further examine this process for tuning neural networks, let's return to a simple example you've seen before.
 
-## Our circles example
+## The Circles Example
 
 
-In classical models and machine learning, often one talks about a "bias-variance trade-off". We'll discuss these concepts here, and tell how deep learning is slightly different and a trade-off isn't always present!
+In classical models and machine learning, often one talks about a "bias-variance trade-off". You'll investigate these concepts here, and see how deep learning is slightly different and a trade-off isn't always present!
 
 Bias = underfitting
 
@@ -50,19 +46,19 @@ high variance = overfitting
 
 good fit --> somewhere in between
 
-examples: let's take another look at our two circles data, the data looked like this:
+To start, take another look at the two circles data, the data looked like this:
 
 ![title](figures/example.png)
 
-Remember that we fit a logistic regression model to the data here. We got something that looked like the picture below. The model didn't do a particularly good job at discriminating between the yellow and purple dots. We would say this is a model with a **high bias**, the model is **underfitting**.
+Remember that you fit a logistic regression model to the data here. You got something that looked like the picture below. The model didn't do a particularly good job at discriminating between the yellow and purple dots. You could say this is a model with a **high bias**, the model is **underfitting**.
 
 ![title](figures/underfitting.png)
 
-When using a neural network, what we reached in the end was a pretty good decision boundary, a circle discriminating between the yellow and purple dots:
+When using a neural network, what you reached in the end was a pretty good decision boundary, a circle discriminating between the yellow and purple dots:
 
 ![title](figures/good.png)
 
-At the other end of the spectrum, we might experience **overfitting**, where we create a circle which is super sensitive to small deviations of the colored dots. An example below. We also call this a model with **high variance**.
+At the other end of the spectrum, you might experience **overfitting**, where you create a circle which is super sensitive to small deviations of the colored dots. An example below. You can also call this a model with **high variance**.
 
 ![title](figures/overfitting.png)
 
@@ -166,14 +162,14 @@ In different iterations through the training set, different nodes will be zeroed
 
 When making predictions, don't do dropout!
 
-Why does dropout regularization work? The idea is that we train the network in a way that in cannot rely on any specific feature, so the weights are spread out.
+Why does dropout regularization work? The idea is that you train the network in a way that in cannot rely on any specific feature, so the weights are spread out.
 
 ## Other types of regularization
 
-At the end of the upcoming lab, we'll further explore two more types of regularization:
+At the end of the upcoming lab, you'll further explore two more types of regularization:
 * Data augmentation
 * Early stopping
 
 ## Summary
 
-In this lesson we began to explore how to further tune and optimize out of the box neural networks built with Keras. This included regularization analagous to our previous machine learning work, as well dropout regularization, used to further prune our networks. In the upcoming lab you'll get a chance to experiment with these concepts in practice and observe their effect on your models outputs.
+In this lesson you began to explore how to further tune and optimize out of the box neural networks built with Keras. This included regularization analogous to previous machine learning work you've seen, as well dropout regularization, used to further prune your networks. In the upcoming lab you'll get a chance to experiment with these concepts in practice and observe their effect on your models outputs.
