@@ -48,25 +48,25 @@ good fit --> somewhere in between
 
 To start, take another look at the two circles data, the data looked like this:
 
-![title](figures/example.png)
+![title](images/example.png)
 
 Remember that you fit a logistic regression model to the data here. You got something that looked like the picture below. The model didn't do a particularly good job at discriminating between the yellow and purple dots. You could say this is a model with a **high bias**, the model is **underfitting**.
 
-![title](figures/underfitting.png)
+![title](images/underfitting.png)
 
 When using a neural network, what you reached in the end was a pretty good decision boundary, a circle discriminating between the yellow and purple dots:
 
-![title](figures/good.png)
+![title](images/good.png)
 
 At the other end of the spectrum, you might experience **overfitting**, where you create a circle which is super sensitive to small deviations of the colored dots. An example below. You can also call this a model with **high variance**.
 
-![title](figures/overfitting.png)
+![title](images/overfitting.png)
 
 ## The Santa Example
 
 <tr>
-<td> <img src="figures/s_4.jpg" alt="Drawing" style="height: 220px;"/> </td>
-<td> <img src="figures/ns_1.jpg" alt="Drawing" style="height: 220px;"/> </td>
+<td> <img src="images/s_4.jpg" alt="Drawing" style="height: 220px;"/> </td>
+<td> <img src="images/ns_1.jpg" alt="Drawing" style="height: 220px;"/> </td>
 </tr>
 
 |       | high variance | high bias   | high variance & bias | low variance and bias |
