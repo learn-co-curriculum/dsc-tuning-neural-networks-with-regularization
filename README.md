@@ -3,96 +3,108 @@
 
 ## Introduction
 
-Now that you've learned about neural networks and some streamlined methods for building such models, it's time to further explore how to tune and optimize the performance of these networks. One important aspect is reducing the time and resources needed to train these models. In previous lessons, when importing the Santa images, you immediately reduces each image to an extremely pixelated 64x64 representation. On top of that, you further down-sampled the dataset to reduce the number of observations. This was because training neural networks is resource intensive and is often a time consuming process as a result. Typically you also want to also improve the accuracy and performance of these models. In this lesson, you will begin to examine various techniques related to these goals, beginning with the discussion of validation sets.
+Now that you've learned about neural networks and some streamlined methods for building such models, it's time to further explore how to tune and optimize the performance of these networks. One important aspect is reducing the time and resources needed to train these models. In previous lessons, when importing the Santa images, you immediately reduced each image to an extremely pixelated 64x64 representation. On top of that, you further down-sampled the dataset to reduce the number of observations. This was because training neural networks is resource intensive and is often a time consuming process as a result. Typically you also want to improve the accuracy and performance of these models. In this lesson, you will begin to examine various techniques related to these goals, beginning with the discussion of validation sets.
 
 ## Objectives
-You will be able to:
-* Explain the relationship between bias and variance
-* Explain general rules of thumb for improving neural networks based on initial bias and variance measurements
 
-## Hyperparameters and iterative deep learning
+You will be able to: 
 
-First, there are many hyperparameters you can tune. These include:
+- Explain the relationship between bias and variance in neural networks  
+- Explain how regularization affects the nodes of a neural network 
+- Explain L1, L2, and dropout regularization in a neural network 
+
+## Hyperparameters and iterative deep learning 
+
+First, there are many hyperparameters you can tune. These include: 
 
 - number of hidden units
 - number of layers
-- learning rate alpha
+- learning rate ( $\alpha$ )
 - activation function
 
+The question then becomes, how do you choose these parameters? One primary method is to develop validation sets to strike a balance between specificity and generalization. 
 
-The question then becomes, how do you choose these parameters? One primary method will be developing validation sets to strike a balance between specificity and generalization.
 
-## Training, Validation and Test Sets
+## Training, Validation, and Test Sets
 
 When tuning neural networks it typically helps to split the data into three distinct partitions as follows:
 - You train algorithms on the training set
 - You'll use a validation set to decide which one will be your final model after parameter tuning
-- After having chosen the final model (and having evaluated long enough), you'll use the test set to get an unbiased estimate of the classification performance (or whatever your evaluation metric will be).
+- After having chosen the final model (and having evaluated long enough), you'll use the test set to get an unbiased estimate of the classification performance (or whatever your evaluation metric will be)  
 
-Remeber that it is **VERY IMPORTANT** to make sure holdout and test sample come from the same distribution: eg. same resolution of santa pictures. 
+Remeber that it is **VERY IMPORTANT** to make sure that the holdout (validation) and test samples come from the same distribution: eg. same resolution of Santa pictures. 
 
 ## Bias and Variance in Deep Learning
 
-Finding a balance between generalization and specificity is at the heart of the bias-variance trade off. To further examine this process for tuning neural networks, let's return to a simple example you've seen before.
+Finding a balance between generalization and specificity is at the heart of the bias-variance trade off. To further examine this process for tuning neural networks, let's return to a simple example you've seen before. 
 
-## The Circles Example
+### The Circles Example
+
+In classical machine learning, you often need to consider "bias-variance trade-off". You'll investigate these concepts here, and see how deep learning is slightly different and a trade-off isn't always present!
+
+- Bias = underfitting
+
+- High variance = overfitting
+
+- Good fit --> somewhere in between 
 
 
-In classical models and machine learning, often one talks about a "bias-variance trade-off". You'll investigate these concepts here, and see how deep learning is slightly different and a trade-off isn't always present!
+To start, take another look at the two circles data, the data looked like this: 
 
-Bias = underfitting
 
-high variance = overfitting
+![title](images/example.png) 
 
-good fit --> somewhere in between
+Recall that you fit a logistic regression model to the data here. You got something that looked like the picture below. The model didn't do a particularly good job at discriminating between the yellow and purple dots. You could say this is a model with a **high bias**, the model is **underfitting**. 
 
-To start, take another look at the two circles data, the data looked like this:
+![title](images/underfitting.png) 
 
-![title](images/example.png)
+When using a neural network, what you reached in the end was a pretty good decision boundary, a circle discriminating between the yellow and purple dots: 
 
-Remember that you fit a logistic regression model to the data here. You got something that looked like the picture below. The model didn't do a particularly good job at discriminating between the yellow and purple dots. You could say this is a model with a **high bias**, the model is **underfitting**.
+![title](images/good.png) 
 
-![title](images/underfitting.png)
+At the other end of the spectrum, you might experience **overfitting**, where you create a circle which is super sensitive to small deviations of the colored dots, like the example below. You can also call this a model with **high variance**. 
 
-When using a neural network, what you reached in the end was a pretty good decision boundary, a circle discriminating between the yellow and purple dots:
+![title](images/overfitting.png)  
 
-![title](images/good.png)
 
-At the other end of the spectrum, you might experience **overfitting**, where you create a circle which is super sensitive to small deviations of the colored dots. An example below. You can also call this a model with **high variance**.
+## The Santa Example 
 
-![title](images/overfitting.png)
-
-## The Santa Example
 
 <tr>
 <td> <img src="images/s_4.jpg" alt="Drawing" style="height: 220px;"/> </td>
 <td> <img src="images/ns_1.jpg" alt="Drawing" style="height: 220px;"/> </td>
-</tr>
+</tr> 
 
-|       | high variance | high bias   | high variance & bias | low variance and bias |
+
+|       | High variance | High bias   | High variance & bias | Low variance and bias |
 |-------|---------------|-------------|----------------------|-----------------------|
 |train set error|   12% | 26%         | 26%                  | 12%                  |
-|validation set error|   25% | 28%         | 40%                   | 13%                   |
+|validation set error|   25% | 28%         | 40%                   | 13%                   | 
 
-Assume that our best model can get to a validation set accuracy of 87%. Note that "high" and "low" are relative! Also, in deep learning there is less of a bias variance trade-off!
 
-## Rules of Thumb Regarding Bias / Variance
+Assume that our best model can get to a validation set accuracy of 87%. Note that "high" and "low" are relative! Also, in deep learning there is less of a bias variance trade-off! 
 
-| High Bias? (training performance) | high variance? (validation performance)  |
+
+## Rules of Thumb Regarding Bias / Variance 
+
+
+| High Bias? (training performance) | High variance? (validation performance)  |
 |---------------|-------------|
 | Use a bigger network|    More data     |
 | Train longer | Regularization   |
-| Look for other existing NN architextures |Look for other existing NN architextures |
+| Look for other existing NN architextures |Look for other existing NN architextures | 
+
 
 ## Regularization
 
-Use regularization when when overfitting is occurring.
+Use regularization when the model overfits to the data. 
 
-## L1 and L2 regularization
 
-## In logistic regression
+### L1 and L2 regularization
 
-Let's look back at the logistic regression-example. with lambda a regularization parameter (another hyperparameter you have to tune).
+#### In logistic regression 
+
+Let's look back at the logistic regression example with lambda, a regularization parameter (another hyperparameter you have to tune).
 
 $$ J (w,b) = \dfrac{1}{m} \sum^m_{i=1}\mathcal{L}(\hat y^{(i)}, y^{(i)})+ \dfrac{\lambda}{2m}||w||_2^2$$
 
@@ -105,9 +117,7 @@ L1-regularization is where you just add a term:
 $$ \dfrac{\lambda}{m}||w||_1$$ (could also be 2 in the denominator)
 
 
-
-
-## In a neural network
+#### In a neural network 
 
 $$ J (w^{[1]},b^{[1]},...,w^{[L]},b^{[L]}) = \dfrac{1}{m} \sum^m_{i=1}\mathcal{L}(\hat y^{(i)}, y^{(i)})+ \dfrac{\lambda}{2m}\sum^L_{l=1}||w^{[l]}||^2$$
 
@@ -117,7 +127,7 @@ this matrix norm is called the "Frobenius norm", also referred to as $||w^{[l]}|
 
 
 How does backpropagation change now?
-whichever expression you have from the backpropagation, and add $\dfrac{\lambda}{m} w^{[l]}$.
+Whichever expression you have from the backpropagation, and add $\dfrac{\lambda}{m} w^{[l]}$.
 So,
 
 $$dw^{[l]} = \text{[backpropagation derivatives] }+ $\dfrac{\lambda}{m} w^{[l]}$$ 
@@ -133,43 +143,35 @@ $$w^{[l]}:= w^{[l]} - \dfrac{\alpha\lambda}{m}w^{[l]} - \alpha \text{[backpropag
 hence your weights will become smaller by a factor $\bigr(1- \dfrac{\alpha\lambda}{m}\bigr)$.
 
 Intuition for regularization: the weight matrices will be penalized from being too large. Actually, the network will be forced to almost be simplified.
-Also: eg, tanh function, if $w$ small, the activation function will be mostly operating in the linear region and not "explode" as easily.
+Also: e.g., _tanh_ function, if $w$ small, the activation function will be mostly operating in the linear region and not "explode" as easily.
 
-## Dropout Regularization
-
-For each node, drop a coin and drop them out (you can also alter the dropout probability to be different from 0.5).
+## Dropout Regularization 
 
 
-Implement dropout for layer l. Let's implement a dropout vector for layer l, denoted by $dl$:
+When you apply the Dropout technique, a random subset of nodes (also called the units) in a layer are ignored (their weights set to zero) during each phase of training. Below is an image from the [original paper](http://www.jmlr.org/papers/volume15/srivastava14a/srivastava14a.pdf) that introduced this technique. 
 
-```
-Specify keep_prob = 0.8
-dl = np.random.rand(al.shape[0], al.shape[1]) < keep_prob
-```
-Activations:
+On the left you can see a standard neural network with four layers (one input layer, two hidden layers, and an output layer). On the right, you can see the network after Dropout is applied during one step of training. This technique is very effective because it allows us to train neural networks on different parts of the data, thus ensuring that our model is not overly sensitive noise in the data. 
 
-```
-al = np.multiply(al,dl)
-```
 
---> there is a 20% chance that each of the elements is 0, you'll zero out the corresponding element. As a last step, you need to divide a3 by `keep_prob`, in order to not reduce the expected value of $z^{[l+1]}$
+![title](images/dropout.png)  
 
-```
-a1 /= keep_prob 
+
+In Keras, you specify *Dropout* using the `Dropout` layer, which is applied to input and hidden layers. The `Dropout` layers requires one argument, `rate`, which specifies the fraction of units to drop, usually between 0.2 and 0.5. 
+
+```python
+model = models.Sequential()
+model.add(layers.Dense(5, activation='relu', input_shape=(500,)))
+# Dropout applied to the input layer
+model.add(layers.Dropout(0.3))
+model.add(layers.Dense(5, activation='relu'))
+# Dropout applied to the hidden layer
+model.add(layers.Dropout(0.3))
+model.add(layers.Dense(1, activation='sigmoid'))
 ```
 
 In different iterations through the training set, different nodes will be zeroed out!
 
-When making predictions, don't do dropout!
-
-Why does dropout regularization work? The idea is that you train the network in a way that in cannot rely on any specific feature, so the weights are spread out.
-
-## Other types of regularization
-
-At the end of the upcoming lab, you'll further explore two more types of regularization:
-* Data augmentation
-* Early stopping
 
 ## Summary
 
-In this lesson you began to explore how to further tune and optimize out of the box neural networks built with Keras. This included regularization analogous to previous machine learning work you've seen, as well dropout regularization, used to further prune your networks. In the upcoming lab you'll get a chance to experiment with these concepts in practice and observe their effect on your models outputs.
+In this lesson you began to explore how to further tune and optimize out of the box neural networks built with Keras. This included regularization analogous to previous machine learning work you've seen, as well dropout regularization, which can be used to further prune your networks. In the upcoming lab you'll get a chance to experiment with these concepts in practice and observe their effect on your models outputs. 
