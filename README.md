@@ -71,8 +71,8 @@ At the other end of the spectrum, you might experience **overfitting**, where yo
 
 
 <tr>
-<td> <img src="images/s_4.jpg" alt="Drawing" style="height: 220px;"/> </td>
-<td> <img src="images/ns_1.jpg" alt="Drawing" style="height: 220px;"/> </td>
+<td> <img src="images/S_4.jpg" alt="Drawing" style="height: 220px;"/> </td>
+<td> <img src="images/NS_1.jpg" alt="Drawing" style="height: 220px;"/> </td>
 </tr> 
 
 
