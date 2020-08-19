@@ -19,7 +19,7 @@ First, there are many hyperparameters you can tune. These include:
 
 - number of hidden units
 - number of layers
-- learning rate ( $\alpha$ )
+- learning rate ( <img src="https://render.githubusercontent.com/render/math?math=\alpha"> )
 - activation function
 
 The question then becomes, how do you choose these parameters? One primary method is to develop validation sets to strike a balance between specificity and generalization. 
@@ -69,10 +69,9 @@ At the other end of the spectrum, you might experience **overfitting**, where yo
 
 ## The Santa Example 
 
-
 <tr>
-<td> <img src="images/S_4.jpg" alt="Drawing" style="height: 220px;"/> </td>
-<td> <img src="images/NS_1.jpg" alt="Drawing" style="height: 220px;"/> </td>
+<td> <img src="images/S_4.jpg" alt="Santa" style="height: 220px;"/> </td>
+<td> <img src="images/NS_1.jpg" alt="CD" style="height: 220px;"/> </td>
 </tr> 
 
 
@@ -102,51 +101,53 @@ Use regularization when the model overfits to the data.
 
 ### L1 and L2 regularization
 
-#### In logistic regression 
+#### **In Logistic Regression**
 
 Let's look back at the logistic regression example with lambda, a regularization parameter (another hyperparameter you have to tune).
 
-$$ J (w,b) = \dfrac{1}{m} \sum^m_{i=1}\mathcal{L}(\hat y^{(i)}, y^{(i)})+ \dfrac{\lambda}{2m}||w||_2^2$$
+<img src="https://render.githubusercontent.com/render/math?math=J (w,b) = \dfrac{1}{m} \displaystyle\sum^m_{i=1}\mathcal{L}(\hat y^{(i)}, y^{(i)})%2b \dfrac{\lambda}{2m}||w||_2^2"> 
+<br>
+<br>
+<img src="https://render.githubusercontent.com/render/math?math=||w||_2^2 = \displaystyle\sum^{n_x}_{j=1}w_j^2= w^Tw"> 
 
-$$||w||_2^2 = \sum^{n_x}_{j=1}w_j^2= w^Tw$$
-
-This is called L2-regularization. You can also add a regularization term for $b$, but $b$ is just one parameter. L2-regularization is the most common type of regularization.
+This is called L2-regularization. You can also add a regularization term for <img src="https://render.githubusercontent.com/render/math?math=b"> , but  <img src="https://render.githubusercontent.com/render/math?math=b"> is just one parameter. L2-regularization is the most common type of regularization.
 
 L1-regularization is where you just add a term:
 
-$$ \dfrac{\lambda}{m}||w||_1$$ (could also be 2 in the denominator)
+<img src="https://render.githubusercontent.com/render/math?math=\dfrac{\lambda}{m}||w||_1"> (could also be 2 in the denominator)
 
 
-#### In a neural network 
+#### **In A Neural Network**
 
-$$ J (w^{[1]},b^{[1]},...,w^{[L]},b^{[L]}) = \dfrac{1}{m} \sum^m_{i=1}\mathcal{L}(\hat y^{(i)}, y^{(i)})+ \dfrac{\lambda}{2m}\sum^L_{l=1}||w^{[l]}||^2$$
+<img src="https://render.githubusercontent.com/render/math?math=J (w^{[1]},b^{[1]},...,w^{[L]},b^{[L]}) = \dfrac{1}{m}  \displaystyle\sum^m_{i=1}\mathcal{L}(\hat y^{(i)}, y^{(i)})%2b \dfrac{\lambda}{2m} \displaystyle\sum^L_{l=1}||w^{[l]}||^2"> 
+<br>
+<img src="https://render.githubusercontent.com/render/math?math=||w^{[l]}||^2 =  \displaystyle\sum^{n^{[l-1]}}_{i=1}  \displaystyle\sum^{n^{[l]}}_{j=1} (w_{ij}^{[l]})^2"> 
 
-$$||w^{[l]}||^2 = \sum^{n^{[l-1]}}_{i=1} \sum^{n^{[l]}}_{j=1} (w_{ij}^{[l]})^2$$
-
-this matrix norm is called the "Frobenius norm", also referred to as $||w^{[l]}||^2 _F$
-
+This matrix norm is called the "Frobenius norm", also referred to as <img src="https://render.githubusercontent.com/render/math?math=||w^{[l]}||^2 _F"> 
 
 How does backpropagation change now?
-Whichever expression you have from the backpropagation, and add $\dfrac{\lambda}{m} w^{[l]}$.
+
+Whichever expression you have from the backpropagation, and add  <img src="https://render.githubusercontent.com/render/math?math=\dfrac{\lambda}{m} w^{[l]}"> .
+
 So,
 
-$$dw^{[l]} = \text{[backpropagation derivatives] }+ $\dfrac{\lambda}{m} w^{[l]}$$ 
+<img src="https://render.githubusercontent.com/render/math?math=dw^{[l]} = \text{[backpropagation derivatives] }%2b \dfrac{\lambda}{m} w^{[l]}"> 
 
-Afterwards, $w^{[l]}$ is updated again as $w^{[l]}:= w^{[l]} - \alpha dw^{[l]} $
+Afterwards, <img src="https://render.githubusercontent.com/render/math?math=w^{[l]}"> is updated again as <img src="https://render.githubusercontent.com/render/math?math=w^{[l]} := w^{[l]} - \alpha dw^{[l]}">
 
 L2-regularization is called weight decay, because regularization will make your load smaller:
 
-$$w^{[l]}:= w^{[l]} - \alpha \bigr( \text{[backpropagation derivatives] }+ \dfrac{\lambda}{m} w^{[l]}\bigr)$$
+ <img src="https://render.githubusercontent.com/render/math?math=w^{[l]}:= w^{[l]} - \alpha \bigr( \text{[backpropagation derivatives] }%2b \dfrac{\lambda}{m} w^{[l]}\bigr)"> 
+<br>
+ <img src="https://render.githubusercontent.com/render/math?math=w^{[l]}:= w^{[l]} - \dfrac{\alpha\lambda}{m}w^{[l]} - \alpha \text{[backpropagation derivatives]}"> 
 
-$$w^{[l]}:= w^{[l]} - \dfrac{\alpha\lambda}{m}w^{[l]} - \alpha \text{[backpropagation derivatives]}$$
-
-hence your weights will become smaller by a factor $\bigr(1- \dfrac{\alpha\lambda}{m}\bigr)$.
+hence your weights will become smaller by a factor <img src="https://render.githubusercontent.com/render/math?math=\bigr(1- \dfrac{\alpha\lambda}{m}\bigr)">.
 
 Intuition for regularization: the weight matrices will be penalized from being too large. Actually, the network will be forced to almost be simplified.
-Also: e.g., _tanh_ function, if $w$ small, the activation function will be mostly operating in the linear region and not "explode" as easily.
+
+Also: e.g., _tanh_ function, if <img src="https://render.githubusercontent.com/render/math?math=w"> is small, the activation function will be mostly operating in the linear region and not "explode" as easily.
 
 ## Dropout Regularization 
-
 
 When you apply the Dropout technique, a random subset of nodes (also called the units) in a layer are ignored (their weights set to zero) during each phase of training. Below is an image from the [original paper](http://www.jmlr.org/papers/volume15/srivastava14a/srivastava14a.pdf) that introduced this technique. 
 
@@ -175,3 +176,4 @@ In different iterations through the training set, different nodes will be zeroed
 ## Summary
 
 In this lesson you began to explore how to further tune and optimize out of the box neural networks built with Keras. This included regularization analogous to previous machine learning work you've seen, as well dropout regularization, which can be used to further prune your networks. In the upcoming lab you'll get a chance to experiment with these concepts in practice and observe their effect on your models outputs. 
+"> 
