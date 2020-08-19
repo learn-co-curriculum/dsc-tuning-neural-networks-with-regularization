@@ -123,14 +123,14 @@ $$ J (w^{[1]},b^{[1]},...,w^{[L]},b^{[L]}) = \dfrac{1}{m} \sum^m_{i=1}\mathcal{L
 
 $$||w^{[l]}||^2 = \sum^{n^{[l-1]}}_{i=1} \sum^{n^{[l]}}_{j=1} (w_{ij}^{[l]})^2$$
 
-this matrix norm is called the "Frobenius norm", also referred to as $||w^{[l]}||^2 _F$
-
+This matrix norm is called the "Frobenius norm", also referred to as $||w^{[l]}||^2 _F$
 
 How does backpropagation change now?
+
 Whichever expression you have from the backpropagation, and add $\dfrac{\lambda}{m} w^{[l]}$.
 So,
 
-$$dw^{[l]} = \text{[backpropagation derivatives] }+ $\dfrac{\lambda}{m} w^{[l]}$$ 
+$$dw^{[l]} = \text{[backpropagation derivatives] }+ \dfrac{\lambda}{m} w^{[l]}$$ 
 
 Afterwards, $w^{[l]}$ is updated again as $w^{[l]}:= w^{[l]} - \alpha dw^{[l]} $
 
@@ -140,10 +140,11 @@ $$w^{[l]}:= w^{[l]} - \alpha \bigr( \text{[backpropagation derivatives] }+ \dfra
 
 $$w^{[l]}:= w^{[l]} - \dfrac{\alpha\lambda}{m}w^{[l]} - \alpha \text{[backpropagation derivatives]}$$
 
-hence your weights will become smaller by a factor $\bigr(1- \dfrac{\alpha\lambda}{m}\bigr)$.
+Hence your weights will become smaller by a factor $\bigr(1- \dfrac{\alpha\lambda}{m}\bigr)$.
 
 Intuition for regularization: the weight matrices will be penalized from being too large. Actually, the network will be forced to almost be simplified.
-Also: e.g., _tanh_ function, if $w$ small, the activation function will be mostly operating in the linear region and not "explode" as easily.
+
+Also: e.g., _tanh_ function, if $w$ is small, the activation function will be mostly operating in the linear region and not "explode" as easily.
 
 ## Dropout Regularization 
 
