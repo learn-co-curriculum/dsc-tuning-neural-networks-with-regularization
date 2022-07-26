@@ -1,4 +1,3 @@
-
 # Tuning Neural Networks with Regularization
 
 ## Introduction
@@ -32,7 +31,7 @@ When tuning neural networks it typically helps to split the data into three dist
 - You'll use a validation set to decide which one will be your final model after parameter tuning
 - After having chosen the final model (and having evaluated long enough), you'll use the test set to get an unbiased estimate of the classification performance (or whatever your evaluation metric will be)  
 
-Remeber that it is **VERY IMPORTANT** to make sure that the holdout (validation) and test samples come from the same distribution: eg. same resolution of Santa pictures. 
+Remember that it is **VERY IMPORTANT** to make sure that the holdout (validation) and test samples come from the same distribution: e.g. same resolution of Santa pictures. 
 
 ## Bias and Variance in Deep Learning
 
@@ -52,27 +51,26 @@ In classical machine learning, you often need to consider "bias-variance trade-o
 To start, take another look at the two circles data, the data looked like this: 
 
 
-![title](images/example.png) 
+<img src="https://raw.githubusercontent.com/learn-co-curriculum/dsc-tuning-neural-networks-with-regularization/master/images/example.png" alt="scatter plot showing two concentric circles" />
 
 Recall that you fit a logistic regression model to the data here. You got something that looked like the picture below. The model didn't do a particularly good job at discriminating between the yellow and purple dots. You could say this is a model with a **high bias**, the model is **underfitting**. 
 
-![title](images/underfitting.png) 
+<img src="https://raw.githubusercontent.com/learn-co-curriculum/dsc-tuning-neural-networks-with-regularization/master/images/underfitting.png" alt="graph with concentric circles, this time partitioned in two by a single diagonal line" />
 
 When using a neural network, what you reached in the end was a pretty good decision boundary, a circle discriminating between the yellow and purple dots: 
 
-![title](images/good.png) 
+<img src="https://raw.githubusercontent.com/learn-co-curriculum/dsc-tuning-neural-networks-with-regularization/master/images/good.png" alt="the same graph, this time with an inner circle and outer area partition" />
 
 At the other end of the spectrum, you might experience **overfitting**, where you create a circle which is super sensitive to small deviations of the colored dots, like the example below. You can also call this a model with **high variance**. 
 
-![title](images/overfitting.png)  
-
+<img src="https://raw.githubusercontent.com/learn-co-curriculum/dsc-tuning-neural-networks-with-regularization/master/images/overfitting.png" alt="the same graph, this time with an inner and outer circle with more wiggly lines" />
 
 ## The Santa Example 
 
 
 <tr>
-<td> <img src="images/S_4.jpg" alt="Drawing" style="height: 220px;"/> </td>
-<td> <img src="images/NS_1.jpg" alt="Drawing" style="height: 220px;"/> </td>
+<td> <img src="https://raw.githubusercontent.com/learn-co-curriculum/dsc-tuning-neural-networks-with-regularization/master/images/S_4.jpg" alt="Santa image" style="height: 220px;"/> </td>
+<td> <img src="https://raw.githubusercontent.com/learn-co-curriculum/dsc-tuning-neural-networks-with-regularization/master/images/NS_1.jpg" alt="Not Santa image" style="height: 220px;"/> </td>
 </tr> 
 
 
@@ -92,7 +90,7 @@ Assume that our best model can get to a validation set accuracy of 87%. Note tha
 |---------------|-------------|
 | Use a bigger network|    More data     |
 | Train longer | Regularization   |
-| Look for other existing NN architextures |Look for other existing NN architextures | 
+| Look for other existing NN architectures |Look for other existing NN architectures | 
 
 
 ## Regularization
@@ -154,7 +152,7 @@ When you apply the Dropout technique, a random subset of nodes (also called the 
 On the left you can see a standard neural network with four layers (one input layer, two hidden layers, and an output layer). On the right, you can see the network after Dropout is applied during one step of training. This technique is very effective because it allows us to train neural networks on different parts of the data, thus ensuring that our model is not overly sensitive noise in the data. 
 
 
-![title](images/dropout.png)  
+<img src="https://raw.githubusercontent.com/learn-co-curriculum/dsc-tuning-neural-networks-with-regularization/master/images/dropout.png" alt="Left: a standard neural net with 2 hidden layers. Right: An example of a thinned net produced by applying dropout to the network on the left." /> 
 
 
 In Keras, you specify *Dropout* using the `Dropout` layer, which is applied to input and hidden layers. The `Dropout` layers requires one argument, `rate`, which specifies the fraction of units to drop, usually between 0.2 and 0.5. 
