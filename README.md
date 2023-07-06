@@ -142,7 +142,7 @@ Hence your weights will become smaller by a factor $\bigr(1- \dfrac{\alpha\lambd
 
 Intuition for regularization: the weight matrices will be penalized from being too large. Actually, the network will be forced to almost be simplified.
 
-Also: e.g., the hyperbolic tangent function $\tanh x$, if $w$ is small, the activation function will be mostly operating in the linear region and not "explode" as easily.
+Also: e.g., hyperbolic tagent function tanh$x$, if $w$ is small, the activation function will be mostly operating in the linear region and not "explode" as easily.
 
 ## Dropout Regularization 
 
