@@ -106,7 +106,7 @@ Let's look back at the logistic regression example with lambda, a regularization
 
 $$ J (w,b) = \dfrac{1}{m} \sum^m_{i=1}\mathcal{L}(\hat y^{(i)}, y^{(i)})+ \dfrac{\lambda}{2m}||w||_2^2$$
 
-<img src="https://curriculum-content.s3.amazonaws.com/data-science/images/l1-1.png/l1-1.png" alt="norm of w" width="200" height="100" />
+<img src="https://curriculum-content.s3.amazonaws.com/data-science/images/l1-1.png/l1-1.png" alt="norm of w" width="300" height="150" />
 
 This is called L2-regularization. You can also add a regularization term for $b$, but $b$ is just one parameter. L2-regularization is the most common type of regularization.
 
@@ -119,7 +119,7 @@ L1-regularization is where you just add a term (could also be 2 in the denominat
 
 $$ J (w^{[1]},b^{[1]},...,w^{[L]},b^{[L]}) = \dfrac{1}{m} \sum^m_{i=1}\mathcal{L}(\hat y^{(i)}, y^{(i)})+ \dfrac{\lambda}{2m}\sum^L_{l=1}||w^{[l]}||^2$$
 
-<img src="https://curriculum-content.s3.amazonaws.com/data-science/images/fro.png/fro.png" alt="Frobenius norm" width="200" height="100" />
+<img src="https://curriculum-content.s3.amazonaws.com/data-science/images/fro.png/fro.png" alt="Frobenius norm" width="300" height="150" />
 
 This matrix norm is called the "Frobenius norm", also referred to as $||w^{[l]}||^2 _F$
 
