@@ -110,9 +110,9 @@ $$ J (w,b) = \dfrac{1}{m} \sum^m_{i=1}\mathcal{L}(\hat y^{(i)}, y^{(i)})+ \dfrac
 
 This is called L2-regularization. You can also add a regularization term for $b$, but $b$ is just one parameter. L2-regularization is the most common type of regularization.
 
-L1-regularization is where you just add a term:
+L1-regularization is where you just add a term (could also be 2 in the denominator):
 
-$$ \dfrac{\lambda}{m}||w||_1$$ (could also be 2 in the denominator)
+<img src="https://curriculum-content.s3.amazonaws.com/data-science/images/l1-2.png/l1-2.png" alt="norm of w" width="200" height="100" />
 
 
 #### In a neural network 
