@@ -112,7 +112,7 @@ This is called L2-regularization. You can also add a regularization term for $b$
 
 L1-regularization is where you just add a term (could also be 2 in the denominator):
 
-<img src="https://curriculum-content.s3.amazonaws.com/data-science/images/l1-2.png/l1-2.png" alt="norm of w" width="200" height="100" />
+<img src="https://curriculum-content.s3.amazonaws.com/data-science/images/l1-2.png/l1-2.png" alt="norm of w" width="100" height="50" />
 
 
 #### In a neural network 
