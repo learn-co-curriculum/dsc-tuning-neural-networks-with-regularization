@@ -106,7 +106,7 @@ Let's look back at the logistic regression example with lambda, a regularization
 
 $$ J (w,b) = \dfrac{1}{m} \sum^m_{i=1}\mathcal{L}(\hat y^{(i)}, y^{(i)})+ \dfrac{\lambda}{2m}||w||_2^2$$
 
-$$||w||_2^2 = \sum^{n_x}_{j=1}w_j^2= w^Tw$$
+$$\left\Vert w\right\Vert _{2}^{2}=\sum_{j=1}^{n_{x}}w_{j}^{2}=w^{T}w$$
 
 This is called L2-regularization. You can also add a regularization term for $b$, but $b$ is just one parameter. L2-regularization is the most common type of regularization.
 
